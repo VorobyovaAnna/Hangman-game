@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<body>
+    <script>
+        // Create an array of words
+        const words = [
+            "javascript", "monkey", "amazing", "pancake",
+            "sugar", "cream", "morning", "uncle", "weight"
+        ];
+
+        // Choose a random word
+        const word = words[Math.floor(Math.random()*words.length)];
+
+        // Set the array of answers
+        const answerArray = [];
+        for (let i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        let remainingLetters = word.length;
+
+        // Game cycle
+        while (remainingLetters > 0) {
+            // Show the player his progress
+            alert(answerArray.join(""));
+
+            // Get answers from the player
+            const guess = prompt("Guess a letter, or click Cancel to stop playing.");
+            if (guess === null) {
+                // Leave the game cycle
+                break;
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter.");
+            } else {
+                // Update the state of the game using the variable parameter guess
+                for (let j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters --;
+                    }
+                }
+            }
+        // End of game cycle
+        }
+
+        // Show the answer and congratulate the player
+        alert(answerArray.join(""));
+        alert("Good job! The answer was " + word);
+    </script>
+</body>
+</html>
